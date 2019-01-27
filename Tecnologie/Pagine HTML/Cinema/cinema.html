@@ -1,0 +1,97 @@
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<title>Cinema</title>
+<script>
+var locandine=["schiaccianoci.jpg", "halloween.jpg", "creed.jpg"];
+var titoli=["Lo schiaccianoci e i quattro regni", "Halloween", "Creed II"];
+var nomi=["Rossa", "Verde", "Blu"];
+var posti=[50, 100, 150];
+
+function popola() {
+	opzioni=document.getElementById("elenco");
+	opzioni.innerHTML="<option value='Invalid'>Scegli il film</option>"
+	for (i=1; i<=3; i++) {
+		cella=document.getElementById("film"+i);
+		cella.innerHTML="";
+		cella.innerHTML+="<p>"+titoli[i-1];
+		cella.innerHTML+="<img width='80%'src='"+locandine[i-1]+ "'>";
+		cella.innerHTML+="<br/><br/>Sala "+nomi[i-1]+"<br/>Posti disponibili: "+posti[i-1];
+		opzioni.innerHTML+="<option value='"+titoli[i-1]+"'>"+titoli[i-1]+"</option>";
+	}
+}
+function aggiorna() {
+	n1=parseInt(document.sell.tickets1.value);
+	n2=parseInt(document.sell.tickets2.value);
+	if (n1<=0 && n2<=0) {
+		alert("Numero biglietti errato");
+	} else {
+		scelto=document.sell.film.selectedIndex;
+		if (scelto==0) {
+			alert("Non hai scelto nessun film");
+		} else {
+			n=n1+n2;
+			if (n>posti[scelto-1]) {
+				alert("Non ci sono abbastanza posti liberi");
+			} else {
+				posti[scelto-1]-=n;
+				reset = document.getElementById("numero1");
+				reset.value=0;
+				reset2 = document.getElementById("numero2");
+				reset2.value=0;
+				reset3=document.getElementById("elenco");
+				reset3.selectedIndex=0;
+				document.getElementById("input").style.display="none";
+				document.getElementById("pp").style.display="block";
+				prezzo=(7*n1)+(4*n2);
+				document.getElementById("prezzo").innerHTML="Prezzo totale: &euro;"+(7*n1+4*n2)+".00";
+			}
+		}
+	}
+	return false;
+}
+function paga() {
+	m=parseInt(document.conf.importo.value);
+	if (m<prezzo) {
+		alert("Importo insufficiente");
+	} else {
+		document.getElementById("input").style.display="block";
+		document.getElementById("pp").style.display="none";
+		popola();
+	}
+	return false;
+}
+</script>
+</head>
+<body onload="popola();" bgcolor="#edfaff">
+<h2 align="center">Cinema Marconi Hack</h1>
+<h3 align="center">Prezzo adulto: 7.00 euro || Prezzo bambino: 4.00 euro</h3>
+<table width="65%" border="1" align="center">
+<tr>
+<td id="film1" align="center" valign="top"></td>
+<td id="film2" align="center" valign="top"></td>
+<td id="film3" align="center" valign="top"></td>
+</tr>
+</table>
+<form name="sell" style="display:block" id="input">
+<div align ="center">
+<br/>
+<select name="film" id="elenco">
+</select>
+<p>Biglietti</p>
+<p>Adulti:<input type="number" name="tickets1" value="0" id="numero1">
+Bambini:<input type="number" name="tickets2" value="0" id="numero2">
+<button onclick ="return(aggiorna());">Prenota</button></p>
+</div>
+</form>
+<div align="center">
+<form name="conf" style="display:none" id="pp" align="center">
+	<p id="prezzo"></p>
+	Inserire importo:<input type="number" name="importo" value="0" id="importo">
+	<button onclick ="return(paga());">Paga</button>
+	<button onclick ="popola();">Annulla</button></p>
+</form>
+</div>
+</body>
+</html>

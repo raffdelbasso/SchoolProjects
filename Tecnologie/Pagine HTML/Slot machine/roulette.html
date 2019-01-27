@@ -1,0 +1,101 @@
+<html>
+<head>
+	<link rel="stylesheet" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<title>Slot Machine!</title>
+</head>
+<body align="center">
+<h1>Slot Machine</h1>
+<div class="puls" id="testo2" onclick="riavvia();">Inserisci gettone</div>
+<p id="tent" class="par" style="display:none"></p>
+<p id="punti" class="par" style="display:none"></p>
+<p id="displayImage" class="par"></p>
+<p id="esito" class="par"></p>
+<div class="puls" style:visibility="visible" id="btn1" onclick="displayImage();">Tenta la fortuna</div>
+<script>
+var t=10;
+var vinto;
+var punti=0;
+function displayImage(){
+	t--;
+	var imgs = new Array(3);
+	document.getElementById("displayImage").innerHTML = "";
+	var n;
+	var i;
+	for (i=0; i<3; i++) {
+		var img = document.createElement("img");
+		img.id="imm";
+		img.height="150";
+		img.width="150";
+		var visua = document.getElementById("displayImage");
+		n = Math.floor((Math.random()*4)+1);
+		switch (n) {
+		case 1:
+			img.src="circle.png";
+			imgs[i]=1;
+			break;
+		case 2:
+			img.src="x.png";
+			imgs[i]=2;
+			break;
+		case 3:
+			img.src="square.png";
+			imgs[i]=3;
+			break;
+		case 4:
+			img.src="triangle.png";
+			imgs[i]=4;
+			break;
+		}
+		visua.appendChild(img);
+	}
+	vinto=true;
+	for (i=0; i<2; i++) {
+		if (imgs[i]!=imgs[i+1]) {
+			vinto=false;
+		} else {
+			punti+=50;
+		}
+	}
+	if (vinto) {
+		punti+=600;
+	} else {
+		if (imgs[0]==imgs[2]) {
+			punti+=50;
+		}
+	}
+
+	document.getElementById("tent").innerHTML = "Tentativi rimanenti: "+t;
+	document.getElementById("punti").innerHTML = "Punteggio: "+punti;
+	if (t==0 || vinto) {
+		reset();
+	}
+}
+function riavvia() {
+	t=10;
+	punti=0;
+	vinto=false;
+	document.getElementById("btn1").style.display="block";
+	document.getElementById("tent").style.display="block";
+	document.getElementById("displayImage").style.display="block";
+	document.getElementById("punti").style.display="block";
+	document.getElementById("punti").innerHTML="Punteggio: "+punti;
+	document.getElementById("displayImage").innerHTML="";
+	document.getElementById("esito").style.display="none";
+	document.getElementById("tent").innerHTML = "Tentativi rimanenti: "+t;
+	document.getElementById("testo2").style.display="none";
+}
+function reset() {
+	document.getElementById("esito").style.display="block";
+	document.getElementById("btn1").style.display="none";
+	if (t==0 && !vinto) {
+		document.getElementById("esito").innerHTML = "Tentativi terminati. La prossima volta sarai più fortunato!";
+	} else {
+		document.getElementById("esito").innerHTML = "Montepremi vinto!";
+	}
+	document.getElementById("testo2").style.display="block";
+}
+
+</script>
+</body>
+</html>

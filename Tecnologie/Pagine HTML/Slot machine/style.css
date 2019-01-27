@@ -1,0 +1,42 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #add8ff;
+}
+.puls {
+  position: absolute;
+  color: white;
+  background: #004c93;
+  border:2px solid #000a56;
+  user-select: none;
+  display: none;
+  padding:5px 25px 5px 25px;
+  transform: translateX(-50%);
+  font-size:15px;
+  border-radius: 20px;
+  margin-left: 50%;
+  line-height: 30px;
+}
+#btn1 {
+  display: none;
+  transform: translateX(0%);
+  margin-left: 0%;
+  bottom: 5%;
+  left: 44%;
+}
+#testo2 {
+  transform: translateX(0%);
+  margin-left: 0%;
+  display: block;
+  bottom: 5%;
+  left: 5%;
+}
+.puls:hover {
+  cursor:pointer;
+  background-color: #001f3d;
+}
+#esito {
+
+}
+#imm {
+  border-radius: 100%;
+}

@@ -1,0 +1,2 @@
+Manifest-version: 10.
+Main-Class: Main

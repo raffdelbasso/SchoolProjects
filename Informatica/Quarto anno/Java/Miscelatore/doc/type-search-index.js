@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"<Unnamed>","l":"Dispositivo"},{"p":"<Unnamed>","l":"GUI"},{"p":"<Unnamed>","l":"GUI2"},{"p":"<Unnamed>","l":"Main"},{"p":"<Unnamed>","l":"Miscelatore"},{"p":"<Unnamed>","l":"PannelloComandi"},{"p":"<Unnamed>","l":"Tubo"}]
